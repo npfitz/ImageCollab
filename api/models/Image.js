@@ -18,8 +18,8 @@ module.exports = {
    	type: "string"
    },
 
-   data:{
-     type: "json"
+   path:{
+     type: "string"
    }
 
    
