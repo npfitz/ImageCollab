@@ -16,9 +16,11 @@ module.exports = {
    
    name:{
    	type: "string"
+   },
+
+   data:{
+     type: "json"
    }
-
-
 
    
   }
