@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="app">
   <head>
-    <title><%- title %></title>
+    <title>Image Collab</title>
 
     <!-- Viewport mobile tag for sensible mobile support -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -28,6 +28,7 @@
     -->
 
     <!--STYLES-->
+    
     <!--STYLES END-->
   </head>
 
@@ -58,6 +59,7 @@
     -->
 
     <!--TEMPLATES-->
+    
     <!--TEMPLATES END-->
 
 
@@ -83,7 +85,13 @@
 
     -->
 
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular-route.js"></script>
     <!--SCRIPTS-->
+    <script src="/linker/js/socket.io.js"></script>
+    <script src="/linker/js/sails.io.js"></script>
+    <script src="/linker/js/app.js"></script>
+    <script src="/linker/js/Controllers/imageController.js"></script>
     <!--SCRIPTS END-->
   </body>
 </html>

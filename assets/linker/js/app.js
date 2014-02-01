@@ -69,3 +69,62 @@
   window.io
 
 );
+
+var app = angular.module("app", ['ngRoute'])
+
+.config(function($routeProvider, $locationProvider){
+
+  $routeProvider.when("/app/Image/:id", {
+    templateUrl: "/templates/Image.html",
+    controller: "imageController"
+  })
+
+  $locationProvider.html5Mode(true);
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
