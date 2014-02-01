@@ -1,0 +1,2 @@
+# ImageCollab
+### a Sails application
