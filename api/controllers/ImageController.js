@@ -17,9 +17,19 @@
 
 module.exports = {
     
-  
+  "updateImage": function (req, res) {
 
+    // Copy over image
+    // TODO
 
+    Image.findOne(req.param('id'))
+    .exec(function(err, image) {
+      image.path = "/images/" + req.files.image.name
+      image.save(function (err){})
+      res.send(image)
+    }
+
+  },
   /**
    * Overrides for the settings in `config/controllers.js`
    * (specific to ImageController)
