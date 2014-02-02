@@ -21,6 +21,10 @@ module.exports = {
 
     Image.subscribe(req.socket)
 
+    console.log('subscribed for model' + req.param("id"));
+    console.log(req.socket);
+
+
 		Image.findOne(req.param("id"))
 		.exec(function(err, image){
 			res.send(image);
@@ -67,7 +71,9 @@ module.exports = {
                         .exec(function(err, image) {
                           image.path = "/images/" + req.files.image.name;
                           image.save(function (err){});
-                          Image.publishUpdate(image.id, {
+                          console.log("Sending Update");
+                          console.log(Image.subscribers(image.id))
+                          Image.publish(req, {id: image.id}, {
                             path: image.path
                           });
                         });

@@ -13,8 +13,6 @@ app.controller("imageController", function($scope, ImageData, ImageService){
    	formData.append("image", file);
    	formData.append("id", $scope.image.id);
 
-   	console.log(formData.id);
-
    	ImageService.updateImage(formData, $scope.image.id)
    	// .success(function(data){
    	// 	console.log(data);
@@ -25,6 +23,7 @@ app.controller("imageController", function($scope, ImageData, ImageService){
 			console.log(message);
 			$scope.image.path = message.data.path;
 		});
+		
     //Clear the uploaded file
     $scope.uploadedFile = null;
 
