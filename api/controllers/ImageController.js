@@ -17,6 +17,17 @@
 
 module.exports = {
 
+	"find": function(req, res){
+
+		Image.findOne(req.param("id"))
+		.exec(function(err, image){
+			res.send(image);
+		})
+
+
+	},
+
+
   "updateImage": function (req, res) {
 
     var fs = require('fs');
@@ -25,7 +36,8 @@ module.exports = {
 
 
     var imageSize = req.files.image.size;
-    var imageDstPath = sails.config.appPath + "/images/" + req.files.image.name;
+    var imageDstPath = sails.config.appPath + "/assets/images/" + req.files.image.name;
+    var imageDstPath2 = sails.config.appPath + "/.tmp/public/images/" + req.files.image.name;
     console.log("imagePath = " + imageDstPath);
 
     console.log(req.files.image.path);
@@ -41,6 +53,22 @@ module.exports = {
               else {
                 fs.write(fd, buffer, 0, imageSize, 0, function(err, bytesWritten, buffer) {
                   if (err) { console.log(err.message) }
+
+
+                  fs.open(imageDstPath2, 'w', function(err, fd){
+                    if (err) { console.log(err.message) }
+                    else {
+                      fs.write(fd, buffer, 0, imageSize, 0, function(err, bytesWritten, buffer) {
+                        if (err) { console.log(err.message) }
+                        Image.findOrCreate(req.param('id'))
+                        .exec(function(err, image) {
+                          image.path = "/images/" + req.files.image.name;
+                          image.save(function (err){})
+                          res.send(image)
+                        });
+                      });
+                    }
+                  });
                 });
               }
             });
@@ -48,14 +76,8 @@ module.exports = {
         });
       }
     });
-    fs.writeFile(imageDstPath, fs.readFile(req.files.image.path), function(err){if (err !== null) {console.log(err)}});
-
-    Image.findOrCreate(req.param('id'))
-      .exec(function(err, image) {
-        image.path = imageDstPath
-        image.save(function (err){})
-        res.send(image)
-      });
+    
+   
 
   },
   /**

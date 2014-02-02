@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="app">
+<html>
   <head>
     <title>Image Collab</title>
 
@@ -32,9 +32,10 @@
     <!--STYLES END-->
   </head>
 
-  <body ng-view>
-    <%- body %>
-
+  <body ng-app="app">
+    <div ng-view>
+      <%- body %>
+    </div>
 
 
     <!--
@@ -84,16 +85,16 @@
           + Use a different preprocessor, like TypeScript
 
     -->
-
+    <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular-route.js"></script>
     <!--SCRIPTS-->
     <script src="/linker/js/socket.io.js"></script>
     <script src="/linker/js/sails.io.js"></script>
+    <script src="/linker/js/Modules/uiImageDrop.js"></script>
     <script src="/linker/js/app.js"></script>
     <script src="/linker/js/Controllers/imageController.js"></script>
     <script src="/linker/js/Directives/imageCollab.js"></script>
-    <script src="/linker/js/Modules/uiImageDrop.js"></script>
     <script src="/linker/js/Services/ImageService.js"></script>
     <!--SCRIPTS END-->
   </body>

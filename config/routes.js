@@ -34,6 +34,11 @@ module.exports.routes = {
   // (This would also work if you had a file at: `/views/home.ejs`)
   '/app/*': {
     view: 'home/index'
+  },
+
+  '/Image/:id': {
+    controller: "ImageController",
+    action: "find"
   }
 
   /*

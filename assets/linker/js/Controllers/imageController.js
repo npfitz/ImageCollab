@@ -1,5 +1,7 @@
 app.controller("imageController", function($scope, ImageData, ImageService){
 	
+	window.scope = $scope;
+
 	$scope.image = ImageData.data;
 
 	$scope.imageDropped = function(){
@@ -9,8 +11,15 @@ app.controller("imageController", function($scope, ImageData, ImageService){
 
    	var formData = new FormData();
    	formData.append("image", file);
+   	formData.append("id", $scope.image.id);
 
-   	ImageService.updateImage(formData)
+   	console.log(formData.id);
+
+   	ImageService.updateImage(formData, $scope.image.id)
+   	.success(function(data){
+   		console.log(data);
+ 			$scope.image = data;
+   	})
 
 
     //Clear the uploaded file

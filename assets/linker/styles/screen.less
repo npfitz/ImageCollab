@@ -1,8 +1,8 @@
-body, html{
+body, html, div{
   height: 100%;
 }
 
-canvas{
+img{
 	height:~"calc(100% - 16px)";
 	width:~"calc(100% - 208px)";
 }
@@ -18,5 +18,5 @@ canvas{
 }
 
 
-body.dragOver #file-drop{display:block;} /* During drag */
+body.dragOver #file-drop{display:block; background-color: grey} /* During drag */
 body #file-drop{z-index:1000;position:fixed;top:0;left:0;width:100%;height:100%;display:none;} /* No drag */

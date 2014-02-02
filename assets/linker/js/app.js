@@ -72,14 +72,14 @@
 
 var app = angular.module("app", ['ngRoute', 'ui.imagedrop'])
 
-.config(function($routeProvider, $locationProvider, $http){
+.config(function($routeProvider, $locationProvider){
 
   $routeProvider.when("/app/Image/:id", {
     templateUrl: "/templates/Image.html",
     controller: "imageController",
     resolve: {
       "ImageData" : function($http, $route){
-        return $http.get("/Client/projects/" + $route.current.params.id);
+        return $http.get("/Image/" + $route.current.params.id);
       }
     }
   })
