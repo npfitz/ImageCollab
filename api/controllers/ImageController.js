@@ -17,12 +17,14 @@
 
 module.exports = {
 
+  /*
 	"find": function(req, res){
 		Image.findOne(req.param("id"))
 		.exec(function(err, image){
 			res.send(image);
 		})
 	},
+  */
 
   "subscribe": function(req, res){
     Image.subscribe(req.socket, [req.param("id")]);
