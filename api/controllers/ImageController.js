@@ -17,7 +17,20 @@
 
 module.exports = {
     
-  
+  'updateImage': function(req, res){
+
+  	/*do stuff to save image to directory */
+
+
+  	Image.findOne(req.param('id'))
+  	.exec(function(err, image){
+  		image.path = "new path";
+  		image.save(function(err){
+  			
+  		})
+  		res.send(image);
+  	})
+  },
 
 
   /**

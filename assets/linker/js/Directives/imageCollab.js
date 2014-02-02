@@ -1,4 +1,4 @@
-app.directive("imageCollab", function(){
+app.directive("imageCollab", function(ImageService){
 
 	return {
 
@@ -12,14 +12,21 @@ app.directive("imageCollab", function(){
 			var ctx = element[0].getContext("2d");
 			var img = new Image();
 
+
+
 			img.onload = function(e){
 				
 				var ratio = img.height / element.prop('offsetHeight');
 				var margin = (element.prop('offsetWidth') - (img.width/ratio))/2
 				console.log(ratio);
 				ctx.drawImage(img, margin, 0, img.width/ratio, img.height/ratio);
-
+				
 				console.log(ctx.getImageData(margin, 0, img.width/ratio, img.height/ratio));
+
+				// ImageService.createImage({data: ctx.getImageData(margin, 0, img.width/ratio, img.height/ratio)})
+				// .success(function(data){
+				// 	console.log('hurray!');
+				// })
 			}
 
 			img.src = attrs["imageCollab"];
