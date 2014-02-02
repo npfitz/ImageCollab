@@ -16,9 +16,11 @@ module.exports = {
    
    name:{
    	type: "string"
+   },
+
+   path:{
+     type: "string"
    }
-
-
 
    
   }
