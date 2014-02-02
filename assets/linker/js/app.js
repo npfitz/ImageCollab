@@ -83,6 +83,16 @@ var app = angular.module("app", ['ngRoute', 'ui.imagedrop'])
     }
   })
 
+  $routeProvider.when("/app/Image", {
+    templateUrl: "/templates/ImageList.html",
+    controller: "imageListController",
+    resolve: {
+      "Images" : function($http) {
+        return $http.get("/Image");
+      }
+    }
+  })
+
   $locationProvider.html5Mode(true);
 
 });

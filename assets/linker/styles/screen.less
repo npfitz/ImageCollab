@@ -9,6 +9,36 @@ img{
 	margin:auto;
 }
 
+.image{
+height:auto;
+  border:1px solid #aaa;
+  border-radius:5px;
+  padding: 8px 0px 8px 8px;
+  position:relative;
+  min-height: 30px;
+
+  p{
+    font-family: sans-serif;
+    margin: 0px;
+    font-size:20px;
+  }
+  
+  a, a:visited{
+    font-family: sans-serif;
+    display:inline-block;
+    position:absolute;
+    right:5px;
+    top:10px;
+    background-color:#333;
+    color:#FFF;
+    border: 1px solid #444;
+    border-radius: 5px;
+    text-decoration:none;
+    font-weight: bold;
+
+  }
+
+}
 
 body.dragOver #file-drop{display:block;} /* During drag */
 body #file-drop{z-index:1000;position:fixed;top:0;left:0;width:100%;height:100%;display:none;} /* No drag */

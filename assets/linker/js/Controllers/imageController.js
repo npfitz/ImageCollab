@@ -40,3 +40,13 @@ app.controller("imageController", function($scope, ImageData, ImageService){
 	}
 
 });
+
+app.controller("imageListController", function($scope, Images){
+	
+	window.scope = $scope;
+
+	$scope.imageList = Images.data;
+
+});
+
+
