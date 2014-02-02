@@ -16,12 +16,15 @@ app.controller("imageController", function($scope, ImageData, ImageService){
    	console.log(formData.id);
 
    	ImageService.updateImage(formData, $scope.image.id)
-   	.success(function(data){
-   		console.log(data);
- 			$scope.image = data;
-   	})
+   	// .success(function(data){
+   	// 	console.log(data);
+ 			// $scope.image = data;
+   	// })
 
-
+		socket.on('message', function messageReceived(message) {
+			console.log(message);
+			$scope.image.path = message.data.path;
+		});
     //Clear the uploaded file
     $scope.uploadedFile = null;
 
