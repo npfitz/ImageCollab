@@ -18,20 +18,16 @@
 module.exports = {
 
 	"find": function(req, res){
-
-    Image.subscribe(req.socket)
-
-    console.log('subscribed for model' + req.param("id"));
-    console.log(req.socket);
-
-
 		Image.findOne(req.param("id"))
 		.exec(function(err, image){
 			res.send(image);
 		})
-
-
 	},
+
+  "subscribe": function(req, res){
+    Image.subscribe(req.socket, [req.param("id")]);
+    res.send({message: "Subscribed for room: " + req.param("id")});
+  },
 
 
   "updateImage": function (req, res) {
@@ -72,8 +68,8 @@ module.exports = {
                           image.path = "/images/" + req.files.image.name;
                           image.save(function (err){});
                           console.log("Sending Update");
-                          console.log(Image.subscribers(image.id))
-                          Image.publish(req, {id: image.id}, {
+                          //console.log(Image.subscribers())
+                          Image.publish(req, [{id: image.id, path: image.path}], {
                             path: image.path
                           });
                         });

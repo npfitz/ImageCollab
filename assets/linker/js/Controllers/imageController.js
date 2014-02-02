@@ -4,6 +4,20 @@ app.controller("imageController", function($scope, ImageData, ImageService){
 
 	$scope.image = ImageData.data;
 
+
+	socket.get("/Image/subscribe/" + $scope.image.id, function(message){
+		console.log(message);
+		
+		socket.on('message', function messageReceived(thing) {
+			console.log(thing);
+			if(thing[0].id == $scope.image.id){
+				$scope.image.path = thing[0].path;
+				$scope.$apply();
+			}
+		});
+	})
+
+
 	$scope.imageDropped = function(){
 
 		//Get the file
@@ -19,11 +33,6 @@ app.controller("imageController", function($scope, ImageData, ImageService){
  			// $scope.image = data;
    	// })
 
-		socket.on('message', function messageReceived(message) {
-			console.log(message);
-			$scope.image.path = message.data.path;
-		});
-		
     //Clear the uploaded file
     $scope.uploadedFile = null;
 
