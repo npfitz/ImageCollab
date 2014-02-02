@@ -19,6 +19,8 @@ module.exports = {
 
 	"find": function(req, res){
 
+    Image.subscribe(req.socket)
+
 		Image.findOne(req.param("id"))
 		.exec(function(err, image){
 			res.send(image);
@@ -39,8 +41,9 @@ module.exports = {
     var imageDstPath = sails.config.appPath + "/assets/images/" + req.files.image.name;
     var imageDstPath2 = sails.config.appPath + "/.tmp/public/images/" + req.files.image.name;
     console.log("imagePath = " + imageDstPath);
-
     console.log(req.files.image.path);
+
+
     fs.open(req.files.image.path, 'r', function(err, fd) {
       if (err) { console.log(err.message) }
       else {
@@ -63,8 +66,10 @@ module.exports = {
                         Image.findOrCreate(req.param('id'))
                         .exec(function(err, image) {
                           image.path = "/images/" + req.files.image.name;
-                          image.save(function (err){})
-                          res.send(image)
+                          image.save(function (err){});
+                          Image.publishUpdate(image.id, {
+                            path: image.path
+                          });
                         });
                       });
                     }
