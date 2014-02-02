@@ -16,18 +16,46 @@
  */
 
 module.exports = {
-    
+
   "updateImage": function (req, res) {
 
-    // Copy over image
-    // TODO
+    var fs = require('fs');
+    var Buffer = require('buffer').Buffer;
+    var constants = require('constants');
 
-    Image.findOne(req.param('id'))
-    .exec(function(err, image) {
-      image.path = "/images/" + req.files.image.name
-      image.save(function (err){})
-      res.send(image)
-    }
+
+    var imageSize = req.files.image.size;
+    var imageDstPath = sails.config.appPath + "/images/" + req.files.image.name;
+    console.log("imagePath = " + imageDstPath);
+
+    console.log(req.files.image.path);
+    fs.open(req.files.image.path, 'r', function(err, fd) {
+      if (err) { console.log(err.message) }
+      else {
+        var buffer = new Buffer(imageSize);
+        fs.read(fd, buffer, 0, imageSize, 0, function(err, bytesRead, buffer) {
+          if (err) { console.log(err.message) }
+          else {
+            fs.open(imageDstPath, 'w', function(err, fd){
+              if (err) { console.log(err.message) }
+              else {
+                fs.write(fd, buffer, 0, imageSize, 0, function(err, bytesWritten, buffer) {
+                  if (err) { console.log(err.message) }
+                });
+              }
+            });
+          }
+        });
+      }
+    });
+    fs.writeFile(imageDstPath, fs.readFile(req.files.image.path), function(err){if (err !== null) {console.log(err)}});
+
+    Image.findOrCreate(req.param('id'))
+      .exec(function(err, image) {
+        image.path = imageDstPath
+        image.save(function (err){})
+        res.send(image)
+      });
 
   },
   /**
@@ -36,5 +64,5 @@ module.exports = {
    */
   _config: {}
 
-  
+
 };
