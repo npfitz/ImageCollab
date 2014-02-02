@@ -17,7 +17,6 @@
 
 module.exports = {
 
-	
   "subscribe": function(req, res){
     Image.subscribe(req.socket, [req.param("id")]);
     res.send({message: "Subscribed for room: " + req.param("id")});
